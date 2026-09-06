@@ -1,6 +1,5 @@
-﻿package com.topmobile.color;
+package com.topmobile.color;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
@@ -13,6 +12,7 @@ import android.os.IBinder;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import androidx.core.app.NotificationCompat;
 
 public class OverlayService extends Service {
 
@@ -63,7 +63,7 @@ public class OverlayService extends Service {
         windowManager.addView(overlayView, params);
     }
 
-    private Notification createNotification() {
+    private android.app.Notification createNotification() {
         String channelId = "overlay_channel";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
@@ -73,18 +73,16 @@ public class OverlayService extends Service {
             );
             NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
-            return new Notification.Builder(this, channelId)
-                    .setContentTitle("TopMobile Color")
-                    .setContentText("الطبقات نشطة")
-                    .setSmallIcon(android.R.drawable.ic_menu_view)
-                    .build();
-        } else {
-            return new Notification.Builder(this)
-                    .setContentTitle("TopMobile Color")
-                    .setContentText("الطبقات نشطة")
-                    .setSmallIcon(android.R.drawable.ic_menu_view)
-                    .build();
         }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setContentTitle("TopMobile Color")
+                .setContentText("الطبقات نشطة")
+                .setSmallIcon(android.R.drawable.ic_menu_view)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setCategory(NotificationCompat.CATEGORY_SERVICE);
+
+        return builder.build();
     }
 
     @Override
