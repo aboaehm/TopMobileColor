@@ -1,6 +1,5 @@
-﻿package com.topmobile.color;
+package com.topmobile.color;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -9,8 +8,9 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_OVERLAY_PERMISSION = 1001;
     private Button btnStartOverlay, btnStopOverlay;
