@@ -16,6 +16,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: List files
+        run: |
+          pwd
+          ls -la
+          find . -name "*.gradle" -o -name "settings.gradle"
+
       - name: Build debug APK
         run: |
           gradle wrapper --gradle-version 7.5.1
